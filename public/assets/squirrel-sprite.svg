@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="360" viewBox="0 0 1440 360" fill="none">
+  <defs>
+    <g id="frameWalk1">
+      <ellipse cx="180" cy="157" rx="98" ry="8" fill="rgba(82,88,93,0.22)"/>
+      <path d="M88 138C43 127 26 76 56 43C85 16 138 20 156 53C173 84 164 126 138 138C121 146 101 147 88 138Z" fill="#DE7B39"/>
+      <path d="M90 123C70 114 62 87 78 68C95 49 126 51 137 71C146 87 140 114 118 124C109 128 99 128 90 123Z" fill="#9F4F24"/>
+      <path d="M124 140C118 116 132 92 160 80C189 68 226 72 247 89C265 104 269 126 253 142C237 156 204 160 168 158C145 156 131 150 124 140Z" fill="#DE7B39"/>
+      <path d="M226 96C223 78 234 63 252 59C270 55 285 66 289 84C293 102 283 117 265 122C247 127 230 115 226 96Z" fill="#DE7B39"/>
+      <path d="M249 61L257 43L264 60Z" fill="#A14D22"/>
+      <path d="M266 65L274 47L281 64Z" fill="#A14D22"/>
+      <ellipse cx="267" cy="83" rx="8" ry="9.5" fill="#fff"/>
+      <ellipse cx="266" cy="84" rx="4.8" ry="6" fill="#1F1714"/>
+      <circle cx="264.8" cy="82.2" r="1.6" fill="#fff"/>
+      <path d="M273 98C282 98 290 103 291 110C292 117 284 123 274 124C264 124 256 119 256 112C257 104 264 99 273 98Z" fill="#F7E7CC"/>
+      <ellipse cx="291" cy="109.5" rx="3.2" ry="3.4" fill="#1F1714"/>
+      <path d="M289 112C285 117 280 119 275 118" stroke="#1F1714" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M178 113C192 111 205 118 208 130C208 141 199 149 186 149C172 148 162 139 161 129C161 121 168 115 178 113Z" fill="#F7E7CC"/>
+      <ellipse cx="164" cy="158" rx="22" ry="7.5" fill="#F7E7CC"/>
+      <ellipse cx="214" cy="160" rx="23" ry="8.5" fill="#F7E7CC"/>
+      <ellipse cx="192" cy="130" rx="22" ry="7.5" fill="#F7E7CC"/>
+    </g>
+    <g id="frameWalk2">
+      <use href="#frameWalk1"/>
+      <ellipse cx="164" cy="156" rx="22" ry="7.5" fill="#F7E7CC"/>
+      <ellipse cx="214" cy="162" rx="23" ry="8.5" fill="#F7E7CC"/>
+      <ellipse cx="194" cy="127" rx="21" ry="7.5" fill="#F7E7CC"/>
+    </g>
+    <g id="frameWalk3">
+      <use href="#frameWalk1"/>
+      <ellipse cx="164" cy="160" rx="22" ry="7.5" fill="#F7E7CC"/>
+      <ellipse cx="214" cy="157" rx="23" ry="8.5" fill="#F7E7CC"/>
+      <ellipse cx="190" cy="132" rx="22" ry="7.5" fill="#F7E7CC"/>
+    </g>
+    <g id="frameWalk4">
+      <use href="#frameWalk1"/>
+      <ellipse cx="164" cy="157" rx="22" ry="7.5" fill="#F7E7CC"/>
+      <ellipse cx="214" cy="161" rx="23" ry="8.5" fill="#F7E7CC"/>
+      <ellipse cx="193" cy="127" rx="21" ry="7.5" fill="#F7E7CC"/>
+    </g>
+    <g id="frameReach1">
+      <use href="#frameWalk1"/>
+      <ellipse cx="202" cy="124" rx="26" ry="7.5" transform="rotate(-16 202 124)" fill="#F7E7CC"/>
+    </g>
+    <g id="frameReach2">
+      <use href="#frameWalk1"/>
+      <ellipse cx="210" cy="120" rx="26" ry="7.5" transform="rotate(-24 210 120)" fill="#F7E7CC"/>
+    </g>
+  </defs>
+  <g transform="translate(0 0)"><use href="#frameWalk1"/></g>
+  <g transform="translate(360 0)"><use href="#frameWalk2"/></g>
+  <g transform="translate(720 0)"><use href="#frameWalk3"/></g>
+  <g transform="translate(1080 0)"><use href="#frameWalk4"/></g>
+  <g transform="translate(0 180)"><use href="#frameReach1"/></g>
+  <g transform="translate(360 180)"><use href="#frameReach2"/></g>
+  <g transform="translate(720 180)"><use href="#frameReach1"/></g>
+  <g transform="translate(1080 180)"><use href="#frameReach2"/></g>
+</svg>
