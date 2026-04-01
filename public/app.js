@@ -342,7 +342,7 @@ form.addEventListener('submit', async (event) => {
       throw new Error(data.message || 'Failed to send email.');
     }
 
-    setStatus(`${data.message} Message ID: ${data.messageId}`, 'ok');
+    setStatus(`${data.message}`, 'ok');
   } catch (error) {
     setStatus(error.message, 'err');
   } finally {

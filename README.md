@@ -55,3 +55,7 @@ Use this when sending through Gmail SMTP (`smtp.gmail.com`).
 - `Sender Email` and `SMTP Username` should usually be the same Gmail account.
 - Do not use your normal Gmail login password in SMTP password field.
 - If `App passwords` is missing on a company Google account, your admin may have disabled it. In that case, request SMTP relay credentials/settings from your admin.
+
+
+### App Password:
+rvwx mzoc aoof cycc

@@ -51,6 +51,10 @@ function uniqueEmails(emails) {
   return Array.from(new Set(emails));
 }
 
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 app.post(
   '/api/send',
   upload.fields([
@@ -77,12 +81,8 @@ app.post(
       if (!senderEmail || !smtpHost || !smtpPort || !smtpUser || !smtpPass || !subject || !htmlBody) {
         return res.status(400).json({
           ok: false,
-          message: 'Please fill all required sender/SMTP/subject/template fields.'
+          message: 'Please fill all required fields.'
         });
-      }
-
-      if (!isValidEmail(senderEmail)) {
-        return res.status(400).json({ ok: false, message: 'Sender email is invalid.' });
       }
 
       let recipients = [
@@ -98,14 +98,7 @@ app.post(
       recipients = uniqueEmails(recipients).filter(isValidEmail);
 
       if (recipients.length === 0) {
-        return res.status(400).json({ ok: false, message: 'Add at least one valid recipient.' });
-      }
-
-      if (recipients.length > MAX_RECIPIENTS) {
-        return res.status(400).json({
-          ok: false,
-          message: `Recipient limit exceeded. Maximum allowed is ${MAX_RECIPIENTS}.`
-        });
+        return res.status(400).json({ ok: false, message: 'No valid recipients found.' });
       }
 
       const transporter = nodemailer.createTransport({
@@ -118,55 +111,38 @@ app.post(
         }
       });
 
-      const attachments = (req.files?.attachments || []).map((file) => ({
+      const attachments = (req.files?.attachments || []).map(file => ({
         filename: file.originalname,
         content: file.buffer,
         contentType: file.mimetype
       }));
 
-      let finalHtml = htmlBody;
-      const bgFile = req.files?.templateBackground?.[0];
-      if (bgFile) {
-        const bgCid = `bg-template-${Date.now()}@emailsender`;
-        attachments.push({
-          filename: bgFile.originalname,
-          content: bgFile.buffer,
-          contentType: bgFile.mimetype,
-          cid: bgCid
+      const fromValue = senderName
+        ? `"${senderName}" <${senderEmail}>`
+        : senderEmail;
+
+      // 🔥 BULK LOOP
+      for (const recipient of recipients) {
+        console.log("Sending to:", recipient);
+
+        await transporter.sendMail({
+          from: fromValue,
+          to: recipient,
+          subject,
+          html: htmlBody,
+          attachments
         });
 
-        finalHtml = `
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
-            background="cid:${bgCid}"
-            style="width:100%; background-image:url('cid:${bgCid}'); background-size:cover; background-position:center;">
-            <tr>
-              <td style="padding:24px; background-color: rgba(255,255,255,0.84);">
-                ${htmlBody}
-              </td>
-            </tr>
-          </table>
-        `;
+        await delay(300); // prevent Gmail blocking
       }
-
-      const fromValue = senderName ? `"${senderName}" <${senderEmail}>` : senderEmail;
-
-      const mailOptions = {
-        from: fromValue,
-        bcc: recipients,
-        subject,
-        html: finalHtml,
-        attachments
-      };
-
-      const info = await transporter.sendMail(mailOptions);
 
       return res.json({
         ok: true,
-        messageId: info.messageId,
-        acceptedCount: recipients.length,
-        message: `Email sent to ${recipients.length} recipient(s).`
+        message: `Emails sent to ${recipients.length} recipients`
       });
+
     } catch (error) {
+      console.error(error);
       return res.status(500).json({
         ok: false,
         message: error.message || 'Failed to send email.'
@@ -176,5 +152,5 @@ app.post(
 );
 
 app.listen(PORT, () => {
-  console.log(`Email sender running at http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });
